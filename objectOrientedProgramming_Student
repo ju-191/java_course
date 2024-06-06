@@ -1,0 +1,58 @@
+PROGRAM.JAVA:
+package application;
+
+import java.util.Scanner;
+import entities.Student;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		String name = sc.nextLine();
+		Student student = new Student();
+		student.nota1 = sc.nextDouble();
+		student.nota2 = sc.nextDouble();
+		student.nota3 = sc.nextDouble();
+		
+		System.out.println("FINAL GRADE = " + student.grade());
+		if (student.pass()) {
+			System.out.println("PASS");
+		}
+		else {
+			System.out.println("FAILED");
+			System.out.println("MISSING " + student.points() + " POINTS");
+		}
+		
+		sc.close();
+
+	}
+
+}
+
+STUDENT.JAVA:
+package entities;
+
+public class Student {
+	
+	public double nota1;
+	public double nota2;
+	public double nota3;
+	
+	public double grade() {
+		return nota1 + nota2 + nota3;
+	}
+	
+	public boolean pass() {
+		if (this.grade() >= 60) {
+			return true;
+		}
+		return false;
+	}
+	
+	public double points() {
+		return 100 - this.grade();
+	}
+
+}
